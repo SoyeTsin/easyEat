@@ -98,57 +98,57 @@
   </div>
 </template>
 <script>
-  import thJpg from '@/assets/th.jpg'
-  import bus from '@/lib/eventBus.js'
-  import http from '../../lib/http'
-  import ApiSetting from '../../lib/apiSetting'
+import thJpg from '@/assets/th.jpg'
+import bus from '@/lib/eventBus.js'
+import http from '../../lib/http'
+import ApiSetting from '../../lib/apiSetting'
 
-  export default {
-    name: 'HelloWorld',
-    data() {
-      return {
-        msg: 'Welcome to Your Vue.js App',
-        thJpg: thJpg,
-        starArr: [true, true, true, false, false],
-        shops: [],
-        searchValue: '',
-      }
-    },
-    created() {
-      console.log('menu')
-      this.searchValue = this.$route.query.searchValue || '';
-      this.searchMenu()
-    },
-    mounted() {
-      const that = this;
-      bus.$on('menuSearchEvent', function (e) {
-        that.searchValue = e || '';
-        console.log('menuSearchEvent:' + that.searchValue || '');
-        that.searchMenu()
-      })
-    },
-    methods: {
-      searchMenu() {
-        const that = this;
-        let data = {
-          "action": "QueryShop",
-          "param": {
-            "state": "open",
-            "description": this.searchValue,
-            "zipCode": "",
-            "start": 0,
-            "count": 100
-          }
+export default {
+  name: 'HelloWorld',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App',
+      thJpg: thJpg,
+      starArr: [true, true, true, false, false],
+      shops: [],
+      searchValue: ''
+    }
+  },
+  created () {
+    console.log('menu')
+    this.searchValue = this.$route.query.searchValue || ''
+    this.searchMenu()
+  },
+  mounted () {
+    const that = this
+    bus.$on('menuSearchEvent', function (e) {
+      that.searchValue = e || ''
+      console.log('menuSearchEvent:' + that.searchValue || '')
+      that.searchMenu()
+    })
+  },
+  methods: {
+    searchMenu () {
+      const that = this
+      let data = {
+        'action': 'QueryShop',
+        'param': {
+          'state': 'open',
+          'description': this.searchValue,
+          'zipCode': '',
+          'start': 0,
+          'count': 100
         }
-        http(ApiSetting.api, data).then(res => {
-          console.log(res.data.data);
-          if (res.data.code === 0) {
-            that.shops = res.data.data.shops
-          }
-        });
       }
+      http(ApiSetting.api, data).then(res => {
+        console.log(res.data.data)
+        if (res.data.code === 0) {
+          that.shops = res.data.data.shops
+        }
+      })
     }
   }
+}
 </script>
 <style scoped lang="less">
   .icon {

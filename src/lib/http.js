@@ -30,7 +30,7 @@ axios.interceptors.response.use(response => {
   return Promise.resolve(error.response)
 })
 
-function errorState(response) {
+function errorState (response) {
   console.log(response)
   // loading
   // 如果http状态码正常，则直接返回数据
@@ -42,7 +42,7 @@ function errorState(response) {
   }
 }
 
-function successState(res) {
+function successState (res) {
   if (res.data.code === 99) {
     // 这里判断重新登陆
     alert(res.data.message || '网络异常')
@@ -63,8 +63,8 @@ const httpServer = (opts, data) => {
     data: data,
     headers: opts.method == 'get' ? {
       'X-Requested-With': 'XMLHttpRequest',
-      "Accept": "application/json",
-      "Content-Type": "application/json; charset=UTF-8"
+      'Accept': 'application/json',
+      'Content-Type': 'application/json; charset=UTF-8'
     } : {
       'X-Requested-With': 'XMLHttpRequest',
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
