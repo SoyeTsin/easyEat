@@ -15,6 +15,7 @@
     components: {soTop, account},
     name: 'App'
   }
+
 </script>
 
 <style>
