@@ -40,57 +40,57 @@
   </div>
 </template>
 <script>
-import iconfont from '@/lib/js/iconfont.js'
-import bus from '@/lib/eventBus.js'
-import http from '../../lib/http'
-import ApiSetting from '../../lib/apiSetting'
+  import iconfont from '@/lib/js/iconfont.js'
+  import bus from '@/lib/eventBus.js'
+  import http from '../../lib/http'
+  import ApiSetting from '../../lib/apiSetting'
 
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      searchValue: '',
-      msg: 'Welcome to Your Vue.js App',
-      address: 'Futian District, Shenzhen'
-    }
-  },
-  mounted () {
-    const that = this
-    bus.$on('searchEvent', function (e) {
-      that.searchValue = e || ''
-      console.log('onSearchEvent:' + that.searchValue || '')
-      that.searchFun()
-    })
-    bus.$on('indexSearchEvent', function (e) {
-      that.searchValue = e || ''
-      console.log('indexSearchEvent:' + that.searchValue || '')
-      that.searchFun()
-    })
-  },
-  methods: {
-    sendSearchFun () {
-      bus.$emit('searchEvent', this.searchValue)
-      console.log('searchEvent:' + this.searchValue)
+  export default {
+    name: 'HelloWorld',
+    data() {
+      return {
+        searchValue: '',
+        msg: 'Welcome to Your Vue.js App',
+        address: 'Futian District, Shenzhen'
+      }
     },
-    searchFun () {
-      this.$router.push({
-        path: '/menu',
-        query: {
-          searchValue:
-            this.searchValue
-        }
+    mounted() {
+      const that = this
+      bus.$on('searchEvent', function (e) {
+        that.searchValue = e || ''
+        console.log('onSearchEvent:' + that.searchValue || '')
+        that.searchFun()
       })
-      bus.$emit('menuSearchEvent', this.searchValue)
+      bus.$on('indexSearchEvent', function (e) {
+        that.searchValue = e || ''
+        console.log('indexSearchEvent:' + that.searchValue || '')
+        that.searchFun()
+      })
     },
-    sendAccountState (e) {
-      bus.$emit('accountStateEvent', e || 0)
-      console.log('emitAccountStateEvent:' + e || 0)
-    },
-    toIndex () {
-      this.$router.push('/index')
+    methods: {
+      sendSearchFun() {
+        bus.$emit('searchEvent', this.searchValue)
+        console.log('searchEvent:' + this.searchValue)
+      },
+      searchFun() {
+        this.$router.push({
+          path: '/menu',
+          query: {
+            searchValue:
+            this.searchValue
+          }
+        })
+        bus.$emit('menuSearchEvent', this.searchValue)
+      },
+      sendAccountState(e) {
+        bus.$emit('accountStateEvent', e || 0)
+        console.log('emitAccountStateEvent:' + e || 0)
+      },
+      toIndex() {
+        this.$router.push('/index')
+      }
     }
   }
-}
 </script>
 <style scoped lang="less">
   .icon {

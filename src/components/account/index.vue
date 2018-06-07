@@ -63,78 +63,78 @@
 </template>
 
 <script>
-import http from '../../lib/http'
-import ApiSetting from '../../lib/apiSetting'
-import bus from '@/lib/eventBus.js'
+  import http from '../../lib/http'
+  import ApiSetting from '../../lib/apiSetting'
+  import bus from '@/lib/eventBus.js'
 
-export default {
-  name: 'index',
-  data () {
-    return {
-      username: '',
-      password: '',
-      accountState: 0 // login==2,register==3
-    }
-  },
-  created () {
-
-  },
-  mounted: function () {
-    const that = this
-    bus.$on('accountStateEvent', function (e) {
-      console.log('onAccountStateEvent:' + e || 0)
-      let accountState = e || 0
-      if (accountState === that.accountState) {
-        that.accountState = 0
-      } else {
-        that.accountState = accountState
+  export default {
+    name: 'index',
+    data() {
+      return {
+        username: '',
+        password: '',
+        accountState: 0 // login==2,register==3
       }
-    })
-  },
-  methods: {
-    openLogin () {
     },
-    openRegister () {
+    created() {
+
     },
-    changeState (e) {
-      this.accountState = e || 0
-    },
-    accountLogin () {
-      let data = {
-        'action': 'Login',
-        'param': {
-          'username': this.username,
-          'password': this.password
+    mounted: function () {
+      const that = this
+      bus.$on('accountStateEvent', function (e) {
+        console.log('onAccountStateEvent:' + e || 0)
+        let accountState = e || 0
+        if (accountState === that.accountState) {
+          that.accountState = 0
+        } else {
+          that.accountState = accountState
         }
-      }
-      http(ApiSetting.api, data).then(
-        (res) => {
+      })
+    },
+    methods: {
+      openLogin() {
+      },
+      openRegister() {
+      },
+      changeState(e) {
+        this.accountState = e || 0
+      },
+      accountLogin() {
+        let data = {
+          'action': 'Login',
+          'param': {
+            'username': this.username,
+            'password': this.password
+          }
+        }
+        http(ApiSetting.api, data).then(
+          (res) => {
+            let result = res.data
+            if (result.code === '0') {
+            }
+          }, res => {
+
+          }
+        )
+      },
+      accountRegister() {
+        let data = {
+          'action': 'Register',
+          'param': {
+            'username': this.username,
+            'password': this.password
+          }
+        }
+        http(ApiSetting.api, data).then(res => {
           let result = res.data
           if (result.code === '0') {
           }
         }, res => {
 
-        }
-      )
-    },
-    accountRegister () {
-      let data = {
-        'action': 'Register',
-        'param': {
-          'username': this.username,
-          'password': this.password
-        }
+        })
       }
-      http(ApiSetting.api, data).then(res => {
-        let result = res.data
-        if (result.code === '0') {
-        }
-      }, res => {
-
-      })
     }
   }
-}
 </script>
 
 <style scoped lang="less">

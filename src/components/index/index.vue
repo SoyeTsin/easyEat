@@ -14,26 +14,26 @@
 </template>
 
 <script>
-import indexBg from '@/assets/index-bg.png'
-import http from '../../lib/http'
-import bus from '@/lib/eventBus.js'
+  import indexBg from '@/assets/index-bg.png'
+  import http from '../../lib/http'
+  import bus from '@/lib/eventBus.js'
 
-export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      searchValue: '',
-      indexBg: indexBg,
-      msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  methods: {
-    sendSearchFun () {
-      bus.$emit('indexSearchEvent', this.searchValue)
-      console.log('indexSearchEvent:' + this.searchValue)
+  export default {
+    name: 'HelloWorld',
+    data() {
+      return {
+        searchValue: '',
+        indexBg: indexBg,
+        msg: 'Welcome to Your Vue.js App'
+      }
+    },
+    methods: {
+      sendSearchFun() {
+        bus.$emit('indexSearchEvent', this.searchValue)
+        console.log('indexSearchEvent:' + this.searchValue)
+      }
     }
   }
-}
 </script>
 
 <style scoped lang="less">

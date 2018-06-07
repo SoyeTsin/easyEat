@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import soTop from '@/components/top/index'
-import account from '@/components/account/index'
+  import soTop from '@/components/top/index'
+  import account from '@/components/account/index'
 
-export default {
-  components: {soTop, account},
-  name: 'App'
-}
+  export default {
+    components: {soTop, account},
+    name: 'App'
+  }
 
 </script>
 
